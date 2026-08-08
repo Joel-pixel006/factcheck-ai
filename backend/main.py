@@ -167,21 +167,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.add_middleware(
-    CORSMiddleware,
 
-    # Frontend URL
-    allow_origins=["http://localhost:5173"],
-
-    # Allow cookies/auth
-    allow_credentials=True,
-
-    # Allow GET, POST, etc.
-    allow_methods=["*"],
-
-    # Allow all headers
-    allow_headers=["*"],
-)
 #sqlite setup (placeholder)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
