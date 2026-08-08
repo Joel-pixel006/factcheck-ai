@@ -16,7 +16,9 @@ function App() {
 
   async function loadHistory() {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/history");
+      const response = await axios.get(
+        "https://factcheck-ai-62fu.onrender.com/history"
+      );
       setHistory(response.data);
     } catch (error) {
       console.error(error);
@@ -31,7 +33,7 @@ function App() {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/check",
+        "https://factcheck-ai-62fu.onrender.com/check",
         {
           text: claim,
         }
@@ -49,7 +51,9 @@ function App() {
 
   async function clearHistory() {
     try {
-      await axios.delete("http://127.0.0.1:8000/history");
+      await axios.delete(
+        "https://factcheck-ai-62fu.onrender.com/history"
+      );
       setHistory([]);
     } catch (error) {
       console.error(error);
@@ -58,16 +62,13 @@ function App() {
 
   return (
     <div className="container">
-
       <div className="hero">
-
         <h1>🔍 FactCheck AI</h1>
 
         <p className="subtitle">
           Verify news, claims and information using AI-powered fact checking
           with trusted sources.
         </p>
-
       </div>
 
       <textarea
@@ -96,17 +97,13 @@ function App() {
       <ResultCard result={result} />
 
       <div className="history-card">
-
         <div className="history-top">
-
           <div>
-
             <h2>🕒 Recent Fact Checks</h2>
 
             <p className="history-subtitle">
               Your previously verified claims
             </p>
-
           </div>
 
           <button
@@ -115,21 +112,15 @@ function App() {
           >
             🗑 Clear History
           </button>
-
         </div>
 
         {history.length === 0 ? (
-
           <p className="history-subtitle">
             No previous fact checks yet.
           </p>
-
         ) : (
-
           history.map((item, index) => (
-
             <div className="history-item" key={index}>
-
               <h3>📝 {item.claim}</h3>
 
               <div
@@ -150,15 +141,10 @@ function App() {
               <p>
                 <strong>Reliability:</strong> {item.reliability}
               </p>
-
             </div>
-
           ))
-
         )}
-
       </div>
-
     </div>
   );
 }
