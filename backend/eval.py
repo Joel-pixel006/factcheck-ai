@@ -87,7 +87,7 @@ for i, case in enumerate(test_cases, start=1):
     start = time.time()
 
     response = requests.post(
-        "http://127.0.0.1:8000/check",
+        "https://factcheck-ai-62fu.onrender.com/check",
         json={
             "text": claim
         }
