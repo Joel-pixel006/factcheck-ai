@@ -10,7 +10,7 @@ import joblib
 from ddgs import DDGS
 import os
 from pathlib import Path
-from semantic_filter import filter_articles
+
 # Load environment variables
 load_dotenv(Path(__file__).parent / ".env")
 GNEWS_API_KEY = os.getenv("GNEWS_API_KEY")
@@ -125,7 +125,8 @@ def answer_question(text):
         return response.text
     except Exception:
         return "AI service temporarily busy. Please try again later."
-
+def filter_articles(claim, articles):
+    return articles, 0.75
 def generate_opinion_response(text):
     try:
         model = genai.GenerativeModel("gemini-2.5-flash")
@@ -179,6 +180,7 @@ from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import DateTime
 from datetime import datetime
+os.makedirs("data", exist_ok=True)
 DATABASE_URL="sqlite:///factcheck.db"
 engine = create_engine(DATABASE_URL)
 #pen = sessionlocal
