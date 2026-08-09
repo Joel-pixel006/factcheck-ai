@@ -1,4 +1,3 @@
-# Import FastAPI framework
 
 from fastapi.middleware.cors import CORSMiddleware
 from rule_classifier import classify_by_rules
@@ -158,7 +157,7 @@ import requests
 # Create FastAPI application
 app = FastAPI()
 # Enable React frontend access
-from fastapi.middleware.cors import CORSMiddleware
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
