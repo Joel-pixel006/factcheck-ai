@@ -159,13 +159,9 @@ import requests
 app = FastAPI()
 # Enable React frontend access
 from fastapi.middleware.cors import CORSMiddleware
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://factcheck-ai-two.vercel.app"
-    ],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -551,8 +547,8 @@ def check_claim(claim: Claim):
         wiki_title = wiki_data.get("title", "")
         wiki_summary = wiki_data.get("extract", "")
 
+    db = SessionLocal()
     if query_type == "fact_claim" or query_type == "entity_search":
-        db = SessionLocal()
         new_claim = ClaimHistory(
             claim=claim.text,
             verdict=verdict,
@@ -562,8 +558,6 @@ def check_claim(claim: Claim):
         )
         db.add(new_claim)
         db.commit()
-        db.close()
-    db.commit()
     db.close()
     return {
         #"original_claim": claim.text,
